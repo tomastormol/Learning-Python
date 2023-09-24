@@ -1,64 +1,77 @@
 def calculator(num1, num2, operator):
     match operator:
-        case "sumar":
+        case "add":
             return num1 + num2
-        case "restar":
+        case "subtract":
             return num1 - num2
-        case "multiplicar":
+        case "multiply":
             return num1 * num2
-        case "dividir":
+        case "divide":
             return num1 / num2
         
 def checkOperacion(op):
-    if type(op) is str and (op == "sumar" or op == "restar" or op == "multiplicar" or op == "dividir"):
+    if type(op) is str and (op == "add" or op == "subtract" or op == "multiply" or op == "divide"):
         return True 
     else:
         return False
 
-print("Hola, bienvenido/a a la calculadora de Python")
-print("Para salir, escribe salir")
-print("Las operaciones posibles son: sumar, restar, multiplicar y dividir")
+print("Hello! Welcome to the Python calculator")
+print("To exit, write exit")
+print("The possible operations are: add, subtract, multiply and divide")
 
 num1 = ""
 num1Checked = False
 opChecked = False
 num2Checked = False
+exit = False
 while True:
     if not num1:
         while not num1Checked:
-            num1 = input("Ingrese primer número: ")
-            if num1.lower() == "salir":
+            num1 = input("Enter first number: ")
+            if num1.lower() == "exit":
+                exit = True
                 break
             elif not num1.isnumeric():
-                print("Recuerde que solo puede introducir valores numéricos")
+                print("Remember that you can only enter numerical values")
             else:
                 num1Checked = True
                 num1 = int(num1)
+    
+    if exit:
+        break
             
     while not opChecked:
-        op = input("Ingrese operación: ")
-        if op.lower() == "salir":
+        op = input("Enter operation: ")
+        if op.lower() == "exit":
+            exit = True
             break
         elif not checkOperacion(op):
-            print("Recuerde que solo puede introducir - sumar, restar, multiplicar o dividir")
+            print("Remember that you can only write: add, subtract, multiply or divide")
         else:
             opChecked = True
             
+    if exit:
+        break
+            
     while not num2Checked:
-        num2 = input("Ingrese segundo número: ")
-        if num2.lower() == "salir":
+        num2 = input("Enter second number: ")
+        if num2.lower() == "exit":
+            exit = True
             break
         elif not num2.isnumeric():
-            print("Recuerde que solo puede introducir valores numéricos")
+            print("Remember that you can only enter numerical values")
         else:
             num2Checked = True
             num2 = int(num2)
+    
+    if exit:
+        break
 
-    resultado = calculator(num1, num2, op)
+    result = calculator(num1, num2, op)
 
     print(
-        f"El resultado de {op} {num1} y {num2} es: {resultado}")
+        f"The result of {op} {num1} and {num2} is: {result}")
 
-    num1 = resultado
+    num1 = result
     opChecked = False
     num2Checked = False
